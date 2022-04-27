@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package management;
+
+message Files {
+    enum Tees {
+        Sgx = 0;
+        Tdx = 1;
+        SevSnp = 2;
+        Sample = 3;
+    }
+    Tees tee = 1;
+    enum Names {
+        Policy = 0;
+        Reference = 1;
+    }
+    Names name = 2;
+}
+
+message ConfigOpaRequest {
+    Files file = 1;
+    bytes content = 2;
+}
+message ConfigOpaResponse {
+    bytes status = 1;
+}
+
+message QueryOpaRequest {
+    Files file = 1;
+}
+message QueryOpaResponse {
+    bytes content = 1;
+}
+
+message TestOpaRequest {
+    bytes policy = 1;
+    bytes reference = 2;
+    bytes input = 3;
+}
+message TestOpaResponse {
+    bytes status = 1;
+}
+
+service OpaService {
+    rpc ConfigOpa(ConfigOpaRequest) returns (ConfigOpaResponse) {};
+    rpc QueryOpa(QueryOpaRequest) returns (QueryOpaResponse) {};
+    rpc TestOpa(TestOpaRequest) returns (TestOpaResponse) {};
+}
+
