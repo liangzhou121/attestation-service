@@ -5,6 +5,10 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "tool"
+path = "app/tool/src/api.rs"
+
 [dependencies]
 shadow-rs = "0.5.25"
 log = "0.4.14"
